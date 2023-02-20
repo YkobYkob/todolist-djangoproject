@@ -1,0 +1,321 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(0, 43, 53);
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  font-family: "Bitter", serif;
+}
+
+.container {
+  min-width: 58rem;
+  width: max-content;
+  height: max-content;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  background: rgb(128, 102, 69);
+  border-radius: 19px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.intro {
+  text-align: center;
+}
+
+.signin_btn {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+  transition: color 200ms ease-in-out;
+}
+
+.signin_btn button {
+  width: 10rem;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background: rgb(0, 0, 0);
+}
+
+.signin_btn:hover {
+  color: rgb(80, 80, 80);
+}
+
+/* FOR THE signin.html AND signup-html PAGES */
+.signin-signup_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+
+.signin-signup_form > div {
+  display: flex;
+  gap: 1rem;
+}
+
+.signin-signup_form > div > input {
+  max-height: 1rem;
+}
+
+.signin-signup_form > input {
+  height: 1.6rem;
+  width: 6rem;
+  cursor: pointer;
+  border: none;
+  background: rgb(0, 0, 0);
+  color: white;
+  border-radius: 5px;
+  transition: color 200ms ease-in-out;
+}
+
+.signin-signup_form > input:hover {
+  color: rgb(80, 80, 80);
+}
+
+/* FOR THE task_list.html PAGE, WHEN LOGGED IN */
+
+.container_loggedin {
+  width: 58rem;
+  height: max-content;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  background: rgb(128, 102, 69);
+  border-radius: 19px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.greet {
+  display: flex;
+  justify-content: space-between;
+  height: 5rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.greet div:nth-child(1) {
+  width: 45%;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+.greet div:nth-child(2) {
+  width: max-content;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-right: 0.5rem;
+}
+
+.greet div:nth-child(2) p {
+  white-space: nowrap;
+}
+
+.create-new-task-btn {
+  width: 11rem;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background: rgb(48, 8, 8);
+  color: white;
+  text-decoration: none;
+  transition: color 200ms ease-in-out;
+}
+
+.create-new-task-btn:hover {
+  color: rgb(75, 75, 75);
+}
+
+.signout_btn button {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  background: rgb(0, 0, 0);
+  color: white;
+  text-decoration: none;
+  transition: color 200ms ease-in-out;
+}
+
+.signout_btn button:hover {
+  color: rgb(80, 80, 80);
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  transition: transform 200ms ease-in-out;
+}
+
+.task:hover{
+  transform: scale(1.01);
+}
+
+.task_icons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: .6rem;
+  width: max-content;
+  margin-right: 1rem;
+}
+
+.task_icons i {
+  font-size: 1.2rem;
+  color: black;
+  transition: color 200ms ease-in-out;
+}
+
+.task_icons i:hover {
+  color: rgb(59, 59, 59);
+}
+
+.task h3 {
+  margin-left: 1rem;
+}
+
+.complete-icon {
+  font-size: 1.5rem !important; 
+  margin-left: .7rem !important; 
+  color: rgb(3, 85, 3) !important; 
+  cursor: pointer !important;
+}
+
+.complete-text {
+  color: rgb(3, 85, 3) !important; 
+  text-decoration: line-through !important;
+}
+
+.complete-task {
+  border-color: rgb(3, 85, 3) !important;
+}
+
+.complete-edit_info {
+  color: rgb(3, 85, 3) !important;
+}
+
+.complete-trash {
+  color: rgb(85, 3, 3) !important;
+}
+
+/* FOR THE update-task.html PAGE*/
+
+.update-task_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.update-task_form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-task_form label {
+  margin-top: 1rem;
+  margin-bottom: .35rem;
+  font-size: larger;
+}
+
+#id_completed {
+  transform: scale(1.5);
+  width: 1rem;
+}
+
+
+.update-task_form > input {
+  height: 2rem;
+  width: 7rem;
+  cursor: pointer;
+  border: none;
+  background: rgb(0, 0, 0);
+  color: white;
+  border-radius: 5px;
+  transition: color 200ms ease-in-out;
+}
+
+.update-task_form > input:hover {
+  color: rgb(80, 80, 80);
+}
+
+.update-task_form > div > input {
+  height: 1.6rem;
+  font-size: 1rem;
+  min-width: 80%;
+}
+
+
+
+
+
+
+/* FOR THE create-task.html PAGE*/
+.create-task_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.create-task_form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-task_form label {
+  margin-top: 1rem;
+  margin-bottom: .35rem;
+  font-size: larger;
+}
+
+.create-task_form > input {
+  height: 2rem;
+  width: 7rem;
+  cursor: pointer;
+  border: none;
+  background: rgb(0, 0, 0);
+  color: white;
+  border-radius: 5px;
+  transition: color 200ms ease-in-out;
+}
+
+.create-task_form > input:hover {
+  color: rgb(80, 80, 80);
+}
+
+.create-task_form > div > input {
+  height: 1.6rem;
+  font-size: 1rem;
+  min-width: 80%;
+}

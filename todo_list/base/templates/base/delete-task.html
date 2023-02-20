@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap" rel="stylesheet">
+    <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body>
+    <div style="max-width: 30rem;" class="container">
+        <form class="confirm_form" method="post">
+            {% csrf_token %}
+            <p style="font-size: 1.3rem;">Are you sure you want to delete this task?</p> 
+                <input class="confirm_div_btn" type="Submit" value="Yes">
+        </form> 
+        <a style="text-decoration: none;" href="{% url 'tasks' %}"><button class="confirm_div_btn">No</button></a> 
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/0b3b1552e0.js" crossorigin="anonymous"></script>
+
+    <!-- Text font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap" rel="stylesheet">
+
+
+    {% if user.is_authenticated %}
+    <title>{{user}}'s Tasks</title>
+    {%else%}
+    <title>To-Do List</title>
+    {%endif%}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+
+    <!-- Jquery linking -->
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <script>
+    $(document).ready(function() {
+      var csrf_token = '{{csrf_token}}'
+
+      $
+    
+      $('.fa-circle').click(function() {
+
+          let isCompleted = true
+          const taskId = $(this).closest('.task').data('task-id');
+
+          const titleElement = $(this).closest('.task').find('.task_title');
+          const editElement = $(this).closest('.task').find('.fa-pen-to-square');
+          const infoElement = $(this).closest('.task').find('.fa-circle-info');
+          const trashElement = $(this).closest('.task').find('.fa-trash');
+          const borderElement = $(this).closest('.task');
+
+          if($(this).hasClass('complete-icon')){
+            isCompleted = false
+            $(this).removeClass('complete-icon')
+            titleElement.removeClass('complete-text');
+            infoElement.removeClass('complete-edit_info');
+            editElement.removeClass('complete-edit_info');
+            trashElement.removeClass('complete-trash');
+            borderElement.removeClass('complete-task');
+            $(this).closest('.task').find('.task_title').attr('title', 'Task Not Completed')
+          } else {
+            isCompleted = true
+            $(this).addClass('complete-icon');
+            titleElement.addClass('complete-text');
+            infoElement.addClass('complete-edit_info');
+            editElement.addClass('complete-edit_info');
+            trashElement.addClass('complete-trash');
+            borderElement.addClass('complete-task');
+            $(this).closest('.task').find('.task_title').attr('title', 'Task Completed')
+          }
+
+          $.ajax({
+              url: '{% url "tasks" %}',
+              type: 'POST',
+              headers: {
+                'X-CSRFToken': csrf_token
+              },
+              data: {'task_id': taskId, 'completed': isCompleted},
+              success: function(response, xhr) {
+                  const titleElement = $(this).closest('.task').find('.task_title');
+                  const editElement = $(this).closest('.task').find('.fa-pen-to-square');
+                  const infoElement = $(this).closest('.task').find('.fa-circle-info');
+                  const trashElement = $(this).closest('.task').find('.fa-trash');
+                  const borderElement = $(this).closest('.task');
+                  if (isCompleted == false) {
+                    $(this).addClass('complete-icon');
+                    titleElement.addClass('complete-text');
+                    infoElement.addClass('complete-edit_info');
+                    editElement.addClass('complete-edit_info');
+                    trashElement.addClass('complete-trash');
+                    borderElement.addClass('complete-task');
+                  } else if (isCompleted == true){
+                    $(this).removeClass('complete-icon')
+                    titleElement.removeClass('complete-text');
+                    infoElement.removeClass('complete-edit_info');
+                    editElement.removeClass('complete-edit_info');
+                    trashElement.removeClass('complete-trash');
+                    borderElement.removeClass('complete-task');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  alert('Error updating task');
+              }
+          });
+      });
+    });
+    </script>
+
+  </head>
+  <body>
+    {% if user.is_authenticated %}
+    <div class="container_loggedin">
+      <div class="greet">
+        <div>
+          <h1 style="font-size: 2.5rem;">To Do List</h1>
+          <a href="{% url 'create-task' %}"><button class="create-new-task-btn">Create New Task</button></a>
+        </div>
+        <div>
+          <p>User: <i>{{user}}</i></p>
+          <a class="signout_btn" href="{% url 'signout' %}"><button>Sign Out</button></a>
+        </div>
+      </div>
+    
+
+        {% for task in tasks%}
+        
+            <div title="Date Created: {{task.date_created}}" data-task-id="{{ task.id }}" class="task {% if task.completed == True%} complete-task {%endif%}">
+              <div style="display: flex; align-items: center;">
+                <i style="font-size: 1.5rem; margin-left: .7rem; color: rgb(0, 0, 0); cursor: pointer;" class="fa-solid fa-circle {% if task.completed == True%} complete-icon {%endif%}"></i>
+                <h3 title="{% if task.completed == True%} Task Completed {%else%}Task Not Completed{%endif%}" class="task_title {% if task.completed == True%} complete-text {%endif%}">{{task.title}}</h3>
+              </div>
+                <div class="task_icons">
+              {% if task.description|length > 0%}
+              <a title="{{task.description}}"><i class="fa-solid fa-circle-info {% if task.completed == True%} complete-edit_info {%endif%}"></i></a>
+              {%endif%}
+              <a title="Edit" href="{% url 'update-task' task.id %}"><i class="fa-regular fa-pen-to-square {% if task.completed == True%} complete-edit_info {%endif%}"></i></a>
+              <a title="Delete" href="{% url 'delete-task' task.id %}"><i class="fa-solid fa-trash {% if task.completed == True%} complete-trash {%endif%}"></i></a>
+                </div>
+            </div>
+
+        {% endfor %}  
+
+      {%if tasks|length < 1%}
+      <h2 style="margin-left: .8rem;">No tasks...</h2>
+      {%endif%}
+
+    </div>
+    {%else%}
+    <div class="container">
+      <h1 class="intro">Welcome! Sign in to make your to-do list</h1>
+      <a class="signin_btn" href="{% url 'signin'%}"><button class="signin_btn">Sign In</button></a>
+    </div>
+    {%endif%}
+
+  </body>
+</html>

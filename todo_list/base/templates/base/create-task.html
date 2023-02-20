@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body>
+    <div class="container">
+        <h1>Create New Task</h1>
+
+            <a href="{% url 'tasks' %}"><button style="max-width: 7rem;" class="create-new-task-btn">Go Back</button></a>
+            
+            <form class="create-task_form" method="post" action="">
+                {% csrf_token %} 
+                <div>
+                    <label for="">Title </label>{{form.title}}
+                    <label for="">Description </label>{{form.description}}
+                    <div style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                        <label style="margin-right: 1rem;" for="">Completed: </label>{{form.completed}}
+                    </div>
+                </div>
+                <input style="margin-bottom: 1.5rem; margin-top: .8rem;" type="Submit" value="Create Task" />
+            </form>
+    </div>
+  </body>
+</html>

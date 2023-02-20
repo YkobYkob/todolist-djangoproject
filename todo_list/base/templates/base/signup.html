@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500&display=swap" rel="stylesheet">
+    <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body>
+    <div style="min-width: 60rem;" class="container">
+      <h2>Sign Up</h2>
+      <form class="signin-signup_form" action="" method="post">
+        {%csrf_token%}
+        <div>
+          <label for="">Username: </label>{{form.username}}
+          <label for="">Password: </label>{{form.password1}}
+          <label for="">Password confirmation: </label>{{form.password2}}
+        </div>
+        <input class="submit-create-user" onclick="getInputValue()" type="submit" value="Create User" />
+      </form>
+
+      <p>
+        Already have a user? Click
+        <a href="{% url 'signin' %}">here</a> to sign in
+      </p>
+    </div>
+
+<script defer>
+    let error_message = '{{error_message}}'
+    console.log(error_message, error_message.length)
+    if (error_message.length != 0) {
+        alert(error_message);
+      }
+
+    function getInputValue() {
+        let username = document.querySelector("#id_username").value;
+        let password1 = document.querySelector("#id_password1").value;
+        let password2 = document.querySelector("#id_password2").value;
+
+        if (password1 != password2) {
+            alert("Password confirmation failed");
+        } else if (password1.length < 8) {
+            alert("Your password must contain at least 8 characters");
+        } else if (isNaN(password1) == false) {
+            alert("Your password can't be entirely numeric");
+        } else if (username.indexOf(" ") !== -1) {
+            alert("Your username can't contain spaces");
+        }
+    }
+ </script> 
+
+  </body>
+</html>
